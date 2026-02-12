@@ -30,7 +30,7 @@ body {
 .chatbot-header {
   background: linear-gradient(135deg, #c99a28 20%, #2d8659 50%, #4ade80 100%);
   color: white;
-  padding: 25px;
+  padding: 18px;
   text-align: center;
   box-shadow: 0 4px 15px rgba(26, 95, 63, 0.3);
 }
@@ -39,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .header-title {
@@ -50,7 +50,7 @@ body {
 }
 
 .header-title i {
-  font-size: 32px;
+  font-size: 28px;
   animation: rotate 3s linear infinite;
   color: white;
 }
@@ -74,7 +74,7 @@ body {
 
 
 .header-title h1 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   margin: 0;
   color: white;
@@ -117,11 +117,12 @@ body {
 }
 
 .message {
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-radius: 16px;
   max-width: 85%;
   word-wrap: break-word;
   animation: slideIn 0.3s ease;
+  font-size: 14px;
 }
 
 @keyframes slideIn {
@@ -197,7 +198,7 @@ body {
 }
 
 .chat-input-area {
-  padding: 15px 20px 20px;
+  padding: 12px 16px 16px;
   background: white;
   border-top: 1px solid #e0e0e0;
 }
@@ -215,10 +216,10 @@ body {
 
 input[type="text"] {
   flex: 1;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border: 2px solid #e0e0e0;
   border-radius: 24px;
-  font-size: 15px;
+  font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
   background: #f8f9fa;
@@ -235,14 +236,14 @@ input[type="text"]::placeholder {
 }
 
 .send-button {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: none;
   background: linear-gradient(135deg, #2d8659 0%, #1a5f3f 100%);
   color: white;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -262,9 +263,9 @@ input[type="text"]::placeholder {
 }
 
 .disclaimer {
-  font-size: 12px;
+  font-size: 11px;
   color: #999;
-  margin-top: 10px;
+  margin-top: 8px;
   text-align: center;
   font-style: italic;
 }
