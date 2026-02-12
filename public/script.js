@@ -1,26 +1,59 @@
-const form = document.getElementById('chat-form');
-const input = document.getElementById('user-input');
-const chatBox = document.getElementById('chat-box');
+document.addEventListener('DOMContentLoaded', () => {
+  const chatForm = document.getElementById('chat-form');
+  const userInput = document.getElementById('user-input');
+  const chatBox = document.getElementById('chat-box');
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
+  chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userMessage = userInput.value.trim();
 
-  const userMessage = input.value.trim();
-  if (!userMessage) return;
+    if (!userMessage) {
+      return;
+    }
 
-  appendMessage('user', userMessage);
-  input.value = '';
+    // Add user's message to chat box
+    appendMessage('user', userMessage);
+    userInput.value = '';
 
-  // Simulasi dummy balasan bot (placeholder)
-  setTimeout(() => {
-    appendMessage('bot', 'Gemini is thinking... (this is dummy response)');
-  }, 1000);
+    // Show "Thinking..." message
+    const thinkingMessage = appendMessage('bot', 'Thinking...');
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          conversation: [{ role: 'user', text: userMessage }],
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from server.');
+      }
+
+      const data = await response.json();
+
+      if (data.result) {
+        // Replace "Thinking..." with the actual response
+        thinkingMessage.textContent = data.result;
+      } else {
+        thinkingMessage.textContent = 'Sorry, no response received.';
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      thinkingMessage.textContent = 'Failed to get response from server.';
+    }
+  });
+
+  function appendMessage(role, text) {
+    const messageElement = document.createElement('div');
+    const textNode = document.createTextNode(text);
+    messageElement.appendChild(textNode);
+    messageElement.className = `message ${role}`;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+    return messageElement;
+  }
 });
-
-function appendMessage(sender, text) {
-  const msg = document.createElement('div');
-  msg.classList.add('message', sender);
-  msg.textContent = text;
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
